@@ -1,0 +1,19 @@
+<div class="comment-<% comment.id %> container"
+    style="border: 1px solid black; padding: 1em; margin: 1em;">
+  <%= comment.user.email %><br />
+  <span>Posted <%= time_ago_in_words(comment.created_at) %></span>
+  <% if current_user == comment.user %>
+    <div class="btn-group float-end">
+
+      <%= button_to "Delete", [post, comment], class:"btn btn-danger", method: :delete %>
+    </div>
+    <div id="edit-form-<%= comment.id %>" class="d-none">
+      <%= render 'comments/form', post: @post, comment: comment %>
+    </div>
+  <% end %> 
+  <hr />
+  <div id="comments-body-<%= comment.id %>">
+    <%= comment.body %>
+  </div>
+  
+</div>
